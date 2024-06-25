@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/18 16:47:10 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/25 14:39:38 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,3 +57,13 @@ int	ft_atoi(const char *nptr)
 	}
 	return (res * sign);
 }
+
+size_t gettime()
+{
+	struct	timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return(tv.tv_usec);
+}
+
+
