@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/25 14:39:38 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:40:53 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,15 @@ size_t gettime()
 	struct	timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return(tv.tv_usec);
+	return((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
 }
 
+int	ft_usleep(size_t time)
+{
+	size_t	start;
 
+	start = gettime();
+	while (gettime() - start < time)
+		usleep(time / 10);
+	return (0);
+}

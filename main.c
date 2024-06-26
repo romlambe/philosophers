@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:27:47 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/25 15:38:24 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:51:56 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ t_data	*init_philo(t_data *data)
 	while (i < data->nb_philo)
 	{
 		data->philo[i] = malloc(sizeof(t_philo));
-		if (!data->philo)
+		if (!data->philo[i])
 			return (NULL);
 		data->philo[i]->id = i;
 		data->philo[i]->state = THINK;
 		data->philo[i]->dead = 0;
+		data->philo[i]->data = data;
 		data->philo[i]->meals_eaten = 0;
 		data->philo[i]->thread = malloc(sizeof(pthread_t));
 		data->philo[i]->last_meal = gettime();
@@ -95,7 +96,9 @@ int main(int ac, char **av)
 		return 1;
 	}
 	data = initialize_data(ac, av);
-	state_thread_philo(data);
+	if (!data)
+		return 1;
+	create_thread(data);
 	// printf("%d\n", data->nb_eat);
 	// printf("%zu\n", data->time_to_die);
 	// printf("%zu\n", data->time_to_eat);

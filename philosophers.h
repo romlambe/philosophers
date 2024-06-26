@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:24:15 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/25 15:33:42 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:41:22 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,13 @@ void	*state_thread_philo(void *arg);
 t_data	*init_philo(t_data *data);
 
 void	ph_write_state(t_philo *philo);
+
+
+t_philo	*ph_sleep(t_philo *philo);
+t_philo	*ph_eat(t_philo *philo);
+void	ph_write_state(t_philo *philo);
+void	*state_thread_philo(void *arg);
+void	*create_thread(t_data *data);
+
+
+int	ft_usleep(size_t time);
