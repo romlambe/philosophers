@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/26 16:40:53 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/28 15:07:56 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,19 @@ int	ft_usleep(size_t time)
 	while (gettime() - start < time)
 		usleep(time / 10);
 	return (0);
+}
+
+void	ft_free(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		free(data->philo[i]->thread);
+		free(data->philo[i]);
+	}
+	free(data->fork);
+	free(data->philo);
+	free(data);
 }

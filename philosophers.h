@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:24:15 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/26 16:41:22 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:24:17 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,4 @@ void	*create_thread(t_data *data);
 
 
 int	ft_usleep(size_t time);
+void	ft_free(t_data *data);

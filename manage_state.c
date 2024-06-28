@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:10:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/26 16:42:43 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:28:46 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	*create_thread(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		pthread_create(data->philo[i]->thread, NULL, &state_thread_philo, (void *)data->philo[i]);
+		pthread_create(data->philo[i]->thread, NULL, &state_thread_philo,
+			(void *)data->philo[i]);
 		i++;
 	}
 	i = 0;
@@ -76,14 +77,14 @@ void	ph_write_state(t_philo *philo)
 	}
 	time = gettime() - philo->data->start_time;
 	if (philo->state == THINK)
-		printf("le philo %d que il gamberge 💭\n", philo->id + 1);
+		printf("%zu: le philo %d que il gamberge 💭\n", time, philo->id + 1);
 	else if (philo->state == EAT)
-		printf("le philo %d que il se regale MIAMMM 🍝\n",philo->id + 1);
+		printf("%zu: le philo %d que il se regale MIAMMM 🍝\n",time, philo->id + 1);
 	else if (philo->state == SLEEP)
-		printf ("le philo %d QUE il dort ce fou 😴\n", philo->id + 1);
+		printf ("%zu: le philo %d QUE il dort ce fou 😴\n",time,philo->id + 1);
 	if (philo->state == DEAD)
 	{
-		printf("le philo %d est dead à %zu 💀\n",philo->id + 1,time);
+		printf("%zu: le philo %d est dead 💀\n",time, philo->id + 1);
 		philo->data->dead = 1;
 	}
 	pthread_mutex_unlock(&philo->data->pen);
@@ -91,7 +92,7 @@ void	ph_write_state(t_philo *philo)
 
 void	ft_graille(t_philo *philo, int i)
 {
-	// size_t	time;
+	size_t	time;
 
 	pthread_mutex_lock(&philo->data->pen);
 	if(philo->data->dead == 1)
@@ -99,14 +100,14 @@ void	ft_graille(t_philo *philo, int i)
 		pthread_mutex_unlock(&philo->data->pen);
 		return ;
 	}
-	// time = gettime() - philo->data->start_time;
+	time = gettime() - philo->data->start_time;
 	if (i == 1)
 	{
-		printf("que %d ca prend sa fourchette 🥄\n", philo->id + 1);
+		printf("%zu: que %d ca prend sa fourchette 🥄\n", time, philo->id + 1);
 	}
 	else if (i == 2)
 	{
-		printf("que %d a pris la fourchette du voisin 🍴\n", philo->id + 1);
+		printf("%zu: que %d a pris la fourchette du voisin 🍴\n",time, philo->id + 1);
 	}
 	pthread_mutex_unlock(&philo->data->pen);
 }

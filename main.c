@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:27:47 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/26 14:51:56 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:30:04 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,8 @@ int main(int ac, char **av)
 	if (!data)
 		return 1;
 	create_thread(data);
-	// printf("%d\n", data->nb_eat);
-	// printf("%zu\n", data->time_to_die);
-	// printf("%zu\n", data->time_to_eat);
-	// printf("%zu\n", data->time_to_sleep);
-
+	// ft_free(data);
+	printf("ayt\n");
 	return (0);
 }
 
