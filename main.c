@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:27:47 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/28 17:30:04 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:22:59 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ t_data	*initialize_data(int ac, char **av)
 	data->time_to_die = ft_atoi(av[2]);
 	data->time_to_eat = ft_atoi(av[3]);
 	data->time_to_sleep = ft_atoi(av[4]);
-	data->dead = 0;
 	data->start_time = gettime();
 	pthread_mutex_init(&data->pen, NULL);
 	if (ac == 6)
 		data->nb_eat = ft_atoi(av[5]);
 	else
 		data->nb_eat = -1;
+	data->dead = 0;
 	data->fork = init_mutex(data);
 	data = init_philo(data);
 	if (!data)
@@ -90,6 +90,7 @@ t_data	*init_philo(t_data *data)
 int main(int ac, char **av)
 {
 	t_data *data;
+
 	if (handle_error_arg(ac, av) == 1)
 	{
 		printf ("t nul bouffon\n");
@@ -98,8 +99,15 @@ int main(int ac, char **av)
 	data = initialize_data(ac, av);
 	if (!data)
 		return 1;
-	create_thread(data);
-	// ft_free(data);
+	if (data->nb_philo == 1)
+	{
+		printf("le philo 1 est entrain de penser\n");
+		printf("le philo 1 a pris une fourchette\n");
+		printf("le philo 1 est mort\n");
+	}
+	else
+		create_thread(data);
+	ft_free(data);
 	printf("ayt\n");
 	return (0);
 }

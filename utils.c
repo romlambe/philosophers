@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/28 15:07:56 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:23:17 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	ft_free(t_data *data)
 	{
 		free(data->philo[i]->thread);
 		free(data->philo[i]);
+		i++;
 	}
 	free(data->fork);
 	free(data->philo);

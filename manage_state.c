@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:10:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/28 17:28:46 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:22:03 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ t_philo	*ph_eat(t_philo *philo)
 	philo->meals_eaten++;
 	philo->last_meal = gettime();
 	philo->state = SLEEP;
-	ft_usleep(philo->data->time_to_eat);
+	usleep(philo->data->time_to_eat * 1000);
 	pthread_mutex_unlock(&philo->data->fork[philo->id]);
 	pthread_mutex_unlock(&philo->data->fork[(philo->id + 1) % philo->data->nb_philo]);
 	return (philo);
@@ -141,8 +141,10 @@ t_philo	*ph_eat(t_philo *philo)
 t_philo	*ph_sleep(t_philo *philo)
 {
 	ph_write_state(philo);
-	ft_usleep(philo->data->time_to_sleep);
+	usleep(philo->data->time_to_sleep * 1000);
 	philo->state = THINK;
 	return (philo);
 }
 
+//en gros quand je ft_usleep ca meurt pas pour 4 410 200 200
+//mais par contre le time est trop bizarre (multiple de 100);
