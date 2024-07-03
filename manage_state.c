@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:10:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/03 15:22:03 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:45:11 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ void	ph_write_state(t_philo *philo)
 	}
 	time = gettime() - philo->data->start_time;
 	if (philo->state == THINK)
-		printf("%zu: le philo %d que il gamberge 💭\n", time, philo->id + 1);
+		printf("%zu: le philo %d est entrain de penser\n", time, philo->id + 1);
 	else if (philo->state == EAT)
-		printf("%zu: le philo %d que il se regale MIAMMM 🍝\n",time, philo->id + 1);
-	else if (philo->state == SLEEP)
-		printf ("%zu: le philo %d QUE il dort ce fou 😴\n",time,philo->id + 1);
-	if (philo->state == DEAD)
+		printf("%zu: le philo %d est entrain de manger\n", time, philo->id + 1);
+	else if(philo->state == SLEEP)
+		printf("%zu: le philo %d est entrain de dormir\n", time, philo->id + 1);
+	else if (philo->state == DEAD)
 	{
-		printf("%zu: le philo %d est dead 💀\n",time, philo->id + 1);
+		printf("%zu: le philo %d est mort\n", time, philo->id + 1);
 		philo->data->dead = 1;
 	}
 	pthread_mutex_unlock(&philo->data->pen);
@@ -103,11 +103,11 @@ void	ft_graille(t_philo *philo, int i)
 	time = gettime() - philo->data->start_time;
 	if (i == 1)
 	{
-		printf("%zu: que %d ca prend sa fourchette 🥄\n", time, philo->id + 1);
+		printf("%zu: le philo %d a pris 1 fourchette\n", time, philo->id + 1);
 	}
 	else if (i == 2)
 	{
-		printf("%zu: que %d a pris la fourchette du voisin 🍴\n",time, philo->id + 1);
+		printf("%zu: le philo %d a pris 2 fourchettes\n",time, philo->id + 1);
 	}
 	pthread_mutex_unlock(&philo->data->pen);
 }
@@ -132,7 +132,7 @@ t_philo	*ph_eat(t_philo *philo)
 	philo->meals_eaten++;
 	philo->last_meal = gettime();
 	philo->state = SLEEP;
-	usleep(philo->data->time_to_eat * 1000);
+	ft_usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(&philo->data->fork[philo->id]);
 	pthread_mutex_unlock(&philo->data->fork[(philo->id + 1) % philo->data->nb_philo]);
 	return (philo);
@@ -141,7 +141,7 @@ t_philo	*ph_eat(t_philo *philo)
 t_philo	*ph_sleep(t_philo *philo)
 {
 	ph_write_state(philo);
-	usleep(philo->data->time_to_sleep * 1000);
+	ft_usleep(philo->data->time_to_sleep);
 	philo->state = THINK;
 	return (philo);
 }
