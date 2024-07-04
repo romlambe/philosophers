@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:27:47 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/03 15:22:59 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:39:56 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	handle_error_arg(int ac, char **av)
 //creer une ft pour mutex des forks
 pthread_mutex_t	*init_mutex(t_data *data)
 {
-	int	i;
-	pthread_mutex_t *mutex;
+	int				i;
+	pthread_mutex_t	*mutex;
 
 	i = 0;
 	mutex = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
@@ -41,7 +41,7 @@ pthread_mutex_t	*init_mutex(t_data *data)
 
 t_data	*initialize_data(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
@@ -87,18 +87,18 @@ t_data	*init_philo(t_data *data)
 	return (data);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data *data;
+	t_data	*data;
 
 	if (handle_error_arg(ac, av) == 1)
 	{
 		printf ("t nul bouffon\n");
-		return 1;
+		return (1);
 	}
 	data = initialize_data(ac, av);
 	if (!data)
-		return 1;
+		return (1);
 	if (data->nb_philo == 1)
 	{
 		printf("le philo 1 est entrain de penser\n");
@@ -111,4 +111,3 @@ int main(int ac, char **av)
 	printf("ayt\n");
 	return (0);
 }
-

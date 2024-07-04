@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:10:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/03 15:45:11 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:43:58 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,16 @@ void	*create_thread(t_data *data)
 	return ((void *)data);
 }
 
-
 void	*state_thread_philo(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
-	while (philo->data->nb_eat == -1 || philo->meals_eaten < philo->data->nb_eat)
+	while (philo->data->nb_eat == -1
+		|| philo->meals_eaten < philo->data->nb_eat)
 	{
 		if (philo->state == DEAD)
-		{
-			printf("il est mort lol 💀\n");
 			return (NULL);
-		}
 		if (philo->last_meal + philo->data->time_to_die < gettime())
 		{
 			philo->state = DEAD;
@@ -64,7 +61,6 @@ void	*state_thread_philo(void *arg)
 	return (NULL);
 }
 
-
 void	ph_write_state(t_philo *philo)
 {
 	size_t	time;
@@ -80,7 +76,7 @@ void	ph_write_state(t_philo *philo)
 		printf("%zu: le philo %d est entrain de penser\n", time, philo->id + 1);
 	else if (philo->state == EAT)
 		printf("%zu: le philo %d est entrain de manger\n", time, philo->id + 1);
-	else if(philo->state == SLEEP)
+	else if (philo->state == SLEEP)
 		printf("%zu: le philo %d est entrain de dormir\n", time, philo->id + 1);
 	else if (philo->state == DEAD)
 	{
@@ -95,7 +91,7 @@ void	ft_graille(t_philo *philo, int i)
 	size_t	time;
 
 	pthread_mutex_lock(&philo->data->pen);
-	if(philo->data->dead == 1)
+	if (philo->data->dead == 1)
 	{
 		pthread_mutex_unlock(&philo->data->pen);
 		return ;
@@ -107,7 +103,7 @@ void	ft_graille(t_philo *philo, int i)
 	}
 	else if (i == 2)
 	{
-		printf("%zu: le philo %d a pris 2 fourchettes\n",time, philo->id + 1);
+		printf("%zu: le philo %d a pris 2 fourchettes\n", time, philo->id + 1);
 	}
 	pthread_mutex_unlock(&philo->data->pen);
 }
@@ -118,12 +114,14 @@ t_philo	*ph_eat(t_philo *philo)
 	{
 		pthread_mutex_lock(&philo->data->fork[philo->id]);
 		ft_graille(philo, 1);
-		pthread_mutex_lock(&philo->data->fork[(philo->id + 1) % philo->data->nb_philo]);
+		pthread_mutex_lock(&philo->data->fork[(philo->id + 1)
+			% philo->data->nb_philo]);
 		ft_graille(philo, 2);
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->data->fork[(philo->id + 1) % philo->data->nb_philo]);
+		pthread_mutex_lock(&philo->data->fork[(philo->id + 1)
+			% philo->data->nb_philo]);
 		ft_graille(philo, 1);
 		pthread_mutex_lock(&philo->data->fork[philo->id]);
 		ft_graille(philo, 2);
@@ -134,7 +132,8 @@ t_philo	*ph_eat(t_philo *philo)
 	philo->state = SLEEP;
 	ft_usleep(philo->data->time_to_eat);
 	pthread_mutex_unlock(&philo->data->fork[philo->id]);
-	pthread_mutex_unlock(&philo->data->fork[(philo->id + 1) % philo->data->nb_philo]);
+	pthread_mutex_unlock(&philo->data->fork[(philo->id + 1)
+		% philo->data->nb_philo]);
 	return (philo);
 }
 
@@ -145,6 +144,3 @@ t_philo	*ph_sleep(t_philo *philo)
 	philo->state = THINK;
 	return (philo);
 }
-
-//en gros quand je ft_usleep ca meurt pas pour 4 410 200 200
-//mais par contre le time est trop bizarre (multiple de 100);

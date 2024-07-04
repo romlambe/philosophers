@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:24:15 by romlambe          #+#    #+#             */
-/*   Updated: 2024/06/28 17:24:17 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:47:50 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,23 @@ typedef struct s_data
 	pthread_mutex_t	*fork;
 }					t_data;
 
-int		handle_error_arg(int ac, char **av);
-int		ft_atoi(const char *nptr);
-int		ft_isdigit(char **av);
-size_t	gettime();
+//Utils
+size_t	gettime(void);
+void	ft_usleep(size_t time);
+void	ft_free(t_data *data);
 
-// pthread_mutex_t	*init_mutex(t_data *data);
+//Create Threads
 void	*state_thread_philo(void *arg);
-
-
-t_data	*init_philo(t_data *data);
-
 void	ph_write_state(t_philo *philo);
-
-
 t_philo	*ph_sleep(t_philo *philo);
 t_philo	*ph_eat(t_philo *philo);
-void	ph_write_state(t_philo *philo);
 void	*state_thread_philo(void *arg);
 void	*create_thread(t_data *data);
 
+//Handle Errors
+int		handle_error_arg(int ac, char **av);
+int		ft_atoi(const char *nptr);
+int		ft_isdigit(char **av);
 
-void	ft_usleep(size_t time);
-void	ft_free(t_data *data);
+//Init
+t_data	*init_philo(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/03 15:42:18 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/04 15:44:53 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ int	ft_atoi(const char *nptr)
 	return (res * sign);
 }
 
-size_t gettime()
+size_t	gettime(void)
 {
-	struct	timeval	tv;
+	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	return((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
+	return ((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
 }
 
 void	ft_usleep(size_t time)
