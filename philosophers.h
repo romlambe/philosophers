@@ -67,5 +67,5 @@ void	*state_thread_philo(void *arg);
 void	*create_thread(t_data *data);
 
 
-int	ft_usleep(size_t time);
+void	ft_usleep(size_t time);
 void	ft_free(t_data *data);

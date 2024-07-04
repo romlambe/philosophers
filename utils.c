@@ -66,14 +66,13 @@ size_t gettime()
 	return((tv.tv_sec) * 1000 + (tv.tv_usec) / 1000);
 }
 
-int	ft_usleep(size_t time)
+void	ft_usleep(size_t time)
 {
 	size_t	start;
 
 	start = gettime();
 	while (gettime() - start < time)
-		usleep(time / 10);
-	return (0);
+		usleep(10);
 }
 
 void	ft_free(t_data *data)
