@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 14:10:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/04 15:43:58 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/05 12:21:50 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ void	ph_write_state(t_philo *philo)
 	}
 	time = gettime() - philo->data->start_time;
 	if (philo->state == THINK)
-		printf("%zu: le philo %d est entrain de penser\n", time, philo->id + 1);
+		printf("\033[0;31m%zu: le philo %d est entrain de penser\n", time, philo->id + 1);
 	else if (philo->state == EAT)
-		printf("%zu: le philo %d est entrain de manger\n", time, philo->id + 1);
+		printf("\033[0;32m%zu: le philo %d est entrain de manger\n", time, philo->id + 1);
 	else if (philo->state == SLEEP)
-		printf("%zu: le philo %d est entrain de dormir\n", time, philo->id + 1);
+		printf("\033[0;35m%zu: le philo %d est entrain de dormir\n", time, philo->id + 1);
 	else if (philo->state == DEAD)
 	{
-		printf("%zu: le philo %d est mort\n", time, philo->id + 1);
+		printf("\033[0;31m%zu: le philo %d est mort\n", time, philo->id + 1);
 		philo->data->dead = 1;
 	}
 	pthread_mutex_unlock(&philo->data->pen);
@@ -99,11 +99,11 @@ void	ft_graille(t_philo *philo, int i)
 	time = gettime() - philo->data->start_time;
 	if (i == 1)
 	{
-		printf("%zu: le philo %d a pris 1 fourchette\n", time, philo->id + 1);
+		printf("\033[0;36m%zu: le philo %d a pris 1 fourchette\n", time, philo->id + 1);
 	}
 	else if (i == 2)
 	{
-		printf("%zu: le philo %d a pris 2 fourchettes\n", time, philo->id + 1);
+		printf("\033[0;33m%zu: le philo %d a pris 2 fourchettes\n", time, philo->id + 1);
 	}
 	pthread_mutex_unlock(&philo->data->pen);
 }
