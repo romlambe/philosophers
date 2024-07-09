@@ -6,7 +6,7 @@
 #    By: romlambe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 16:15:33 by romlambe          #+#    #+#              #
-#    Updated: 2024/06/25 14:10:52 by romlambe         ###   ########.fr        #
+#    Updated: 2024/07/09 12:10:33 by romlambe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ AUTHOR = romlambe
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC := main.c utils.c manage_state.c
+SRC := main.c utils.c manage_state.c utils2.c
 
 OBJ = $(SRC:.c=.o)
 

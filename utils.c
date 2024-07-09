@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/04 15:44:53 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:08:37 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	ft_usleep(size_t time)
 
 	start = gettime();
 	while (gettime() - start < time)
-		usleep(10);
+		usleep(500);
 }
 
 void	ft_free(t_data *data)
