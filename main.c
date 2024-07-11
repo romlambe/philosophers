@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 16:27:47 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/04 15:39:56 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:53:15 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ t_data	*initialize_data(int ac, char **av)
 	else
 		data->nb_eat = -1;
 	data->dead = 0;
-	data->fork = init_mutex(data);
 	data = init_philo(data);
 	if (!data)
+		return (NULL);
+	data->fork = init_mutex(data);
+	if (!data->fork)
 		return (NULL);
 	return (data);
 }
@@ -70,6 +72,8 @@ t_data	*init_philo(t_data *data)
 
 	i = 0;
 	data->philo = malloc(sizeof(t_philo *) * data->nb_philo);
+	if (!data->philo)
+		return (NULL);
 	while (i < data->nb_philo)
 	{
 		data->philo[i] = malloc(sizeof(t_philo));
@@ -108,6 +112,5 @@ int	main(int ac, char **av)
 	else
 		create_thread(data);
 	ft_free(data);
-	printf("ayt\n");
 	return (0);
 }
