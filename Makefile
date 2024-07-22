@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: romlambe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/06/20 16:15:33 by romlambe          #+#    #+#              #
-#    Updated: 2024/07/09 12:10:33 by romlambe         ###   ########.fr        #
+#    Created: 2024/07/17 14:16:39 by romlambe          #+#    #+#              #
+#    Updated: 2024/07/19 10:29:36 by romlambe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ AUTHOR = romlambe
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC := main.c utils.c manage_state.c utils2.c
+SRC := main.c action.c init.c monitor.c threads.c utils.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -5,33 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:33:09 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/11 14:57:44 by romlambe         ###   ########.fr       */
+/*   Created: 2024/07/17 14:28:37 by romlambe          #+#    #+#             */
+/*   Updated: 2024/07/22 14:18:19 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
-
-int	ft_isdigit(char **av)
-{
-	int	i;
-	int	j;
-
-	i = 1;
-	while (av[i])
-	{
-		j = 0;
-		while (av[i][j])
-		{
-			if (av[i][j] >= '0' && av[i][j] <= '9')
-				j++;
-			else
-				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
+#include "philo.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -58,7 +37,7 @@ int	ft_atoi(const char *nptr)
 	return (res * sign);
 }
 
-size_t	gettime(void)
+size_t	get_current_time(void)
 {
 	struct timeval	tv;
 
@@ -66,27 +45,38 @@ size_t	gettime(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void	ft_usleep(size_t time)
+int	ft_usleep(size_t millisecond)
 {
 	size_t	start;
 
-	start = gettime();
-	while (gettime() - start < time)
+	start = get_current_time();
+	while ((get_current_time() - start) < millisecond)
 		usleep(500);
+	return (0);
 }
 
-void	ft_free(t_data *data)
+void	print_message(char *str, t_philo *philo, int id)
+{
+	size_t	time;
+
+	pthread_mutex_lock(philo->write_lock);
+	time = get_current_time() - philo->start_time;
+	if (!dead_loop(philo))
+		printf("%zu: %d %s\n", time, id, str);
+	pthread_mutex_unlock(philo->write_lock);
+}
+
+void	ft_free(t_data *data, pthread_mutex_t *fork)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->nb_philo)
+	while (i < data->philo[0].num_of_philos)
 	{
-		free(data->philo[i]->thread);
-		free(data->philo[i]);
+		pthread_mutex_destroy(&fork[i]);
 		i++;
 	}
-	free(data->fork);
-	free(data->philo);
-	free(data);
+	pthread_mutex_destroy(&data->meal_lock);
+	pthread_mutex_destroy(&data->write_lock);
+	pthread_mutex_destroy(&data->dead_lock);
 }

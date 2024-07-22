@@ -5,112 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/18 16:27:47 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/11 14:53:15 by romlambe         ###   ########.fr       */
+/*   Created: 2024/07/17 14:24:41 by romlambe          #+#    #+#             */
+/*   Updated: 2024/07/22 14:20:02 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include "philo.h"
 
-int	handle_error_arg(int ac, char **av)
-{
-	if (ac < 5 || ac > 6 || ac == 1)
-		return (1);
-	if (ft_isdigit(av) == 1)
-		return (1);
-	return (0);
-}
-
-//creer une ft pour mutex des forks
-pthread_mutex_t	*init_mutex(t_data *data)
-{
-	int				i;
-	pthread_mutex_t	*mutex;
-
-	i = 0;
-	mutex = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!mutex)
-		return (NULL);
-	while (i < data->nb_philo)
-	{
-		pthread_mutex_init(&mutex[i], NULL);
-		i++;
-	}
-	return (mutex);
-}
-
-t_data	*initialize_data(int ac, char **av)
-{
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
-	if (!data)
-		return (NULL);
-	data->nb_philo = ft_atoi(av[1]);
-	data->time_to_die = ft_atoi(av[2]);
-	data->time_to_eat = ft_atoi(av[3]);
-	data->time_to_sleep = ft_atoi(av[4]);
-	data->start_time = gettime();
-	pthread_mutex_init(&data->pen, NULL);
-	if (ac == 6)
-		data->nb_eat = ft_atoi(av[5]);
-	else
-		data->nb_eat = -1;
-	data->dead = 0;
-	data = init_philo(data);
-	if (!data)
-		return (NULL);
-	data->fork = init_mutex(data);
-	if (!data->fork)
-		return (NULL);
-	return (data);
-}
-
-t_data	*init_philo(t_data *data)
+int	check_arg(char *arg)
 {
 	int	i;
 
 	i = 0;
-	data->philo = malloc(sizeof(t_philo *) * data->nb_philo);
-	if (!data->philo)
-		return (NULL);
-	while (i < data->nb_philo)
+	while (arg[i])
 	{
-		data->philo[i] = malloc(sizeof(t_philo));
-		if (!data->philo[i])
-			return (NULL);
-		data->philo[i]->id = i;
-		data->philo[i]->state = THINK;
-		data->philo[i]->dead = 0;
-		data->philo[i]->data = data;
-		data->philo[i]->meals_eaten = 0;
-		data->philo[i]->thread = malloc(sizeof(pthread_t));
-		data->philo[i]->last_meal = gettime();
+		if (arg[i] < '0' || arg[i] > '9')
+			return (1);
 		i++;
 	}
-	return (data);
+	return (0);
+}
+
+int	check_valid_arg(char **av)
+{
+	if (ft_atoi(av[1]) > 200 || (ft_atoi(av[1]) <= 0)
+		|| (check_arg(av[1]) == 1))
+		return (printf("Error : Invalid philosophers number \n"), 1);
+	else if (ft_atoi(av[2]) <= 0 || (check_arg(av[2]) == 1))
+		return (printf("Error : Invalid time to die\n"), 1);
+	else if (ft_atoi(av[3]) <= 0 || (check_arg(av[3]) == 1))
+		return (printf("Error : Invalid time to eat\n"), 1);
+	else if (ft_atoi(av[4]) <= 0 || (check_arg(av[4]) == 1))
+		return (printf("Error : Invalid time to sleep\n"), 1);
+	else if (av[5] && (ft_atoi(av[5]) < 0 || (check_arg(av[5]) == 1)))
+		return (printf("Error : Invalid number of meals to be taken eat\n"), 1);
+	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_data	*data;
+	t_data			data;
+	t_philo			philo[200];
+	pthread_mutex_t	fork[200];
 
-	if (handle_error_arg(ac, av) == 1)
+	if (ac != 5 && ac != 6)
+		return (printf("Error: Wrong arguments\n"), 1);
+	if (check_valid_arg(av) == 1)
+		return (printf("Error: Arguments must be number\n"), 1);
+	init_program(&data, philo);
+	init_fork(fork, ft_atoi(av[1]));
+	init_philo(philo, &data, fork, av);
+	if (philo->num_of_philos == 1)
 	{
-		printf ("t nul bouffon\n");
-		return (1);
-	}
-	data = initialize_data(ac, av);
-	if (!data)
-		return (1);
-	if (data->nb_philo == 1)
-	{
-		printf("le philo 1 est entrain de penser\n");
-		printf("le philo 1 a pris une fourchette\n");
-		printf("le philo 1 est mort\n");
+		printf("philo 1 is thinking\n");
+		printf("philo 1 has taken a fork \n");
+		printf("philo 1 die\n");
 	}
 	else
-		create_thread(data);
-	ft_free(data);
+		thread_create(&data, fork);
+	ft_free(&data, fork);
 	return (0);
 }
