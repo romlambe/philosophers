@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:16:45 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 14:25:19 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:58:51 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	init_input(t_philo *philo, char **av);
 void	init_philo(t_philo *philo, t_data *data, pthread_mutex_t *fork,
 			char **av);
 void	init_fork(pthread_mutex_t *fork, int num_philo);
-void	init_program(t_data *data, t_philo *philo);
+void	init_data(t_data *data, t_philo *philo);
 
 //THREADS
 int		dead_loop(t_philo *philo);

@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:47:38 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 14:18:05 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:59:48 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	init_fork(pthread_mutex_t *fork, int num_philo)
 	}
 }
 
-void	init_program(t_data *data, t_philo *philo)
+void	init_data(t_data *data, t_philo *philo)
 {
 	data->dead_flag = 0;
 	data->philo = philo;

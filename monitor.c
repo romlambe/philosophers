@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:41:37 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 14:29:45 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/22 15:59:31 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	philo_dead(t_philo *philo, size_t time_to_die)
 	pthread_mutex_lock(philo->meal_lock);
 	if (get_current_time() - philo->last_meal >= time_to_die
 		&& philo->eating == 0)
-		return(pthread_mutex_unlock(philo->meal_lock), 1);
+		return (pthread_mutex_unlock(philo->meal_lock), 1);
 	pthread_mutex_unlock(philo->meal_lock);
 	return (0);
 }
@@ -39,7 +39,7 @@ int	check_if_dead(t_philo *philo)
 		}
 		i++;
 	}
-	return  (0);
+	return (0);
 }
 
 int	check_nb_eat(t_philo *philo)
@@ -71,11 +71,11 @@ int	check_nb_eat(t_philo *philo)
 
 void	*monitor(void *pointeur)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)pointeur;
 	while (1)
 		if (check_if_dead(philo) == 1 || check_nb_eat(philo) == 1)
-			break;
+			break ;
 	return (pointeur);
 }
