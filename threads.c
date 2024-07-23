@@ -37,28 +37,28 @@ void	*routine(void *pointeur)
 	return (pointeur);
 }
 
-int	thread_create(t_data *data, pthread_mutex_t *fork)
+int	thread_create(t_data *data, pthread_mutex_t *fork, t_philo *philo)
 {
 	pthread_t	thread;
 	int			i;
 
 	if (pthread_create(&thread, NULL, &monitor, data->philo) != 0)
-		ft_free(data, fork);
+		ft_free(data, fork, philo);
 	i = 0;
 	while (i < data->philo[0].num_of_philos)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, &routine
 				, &data->philo[i]) != 0)
-			ft_free(data, fork);
+			ft_free(data, fork, philo);
 		i++;
 	}
 	i = 0;
 	if (pthread_join(thread, NULL) != 0)
-		ft_free(data, fork);
+		ft_free(data, fork, philo);
 	while (i < data->philo[0].num_of_philos)
 	{
 		if (pthread_join(data->philo[i].thread, NULL) != 0)
-			ft_free(data, fork);
+			ft_free(data, fork, philo);
 		i++;
 	}
 	return (0);

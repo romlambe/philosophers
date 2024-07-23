@@ -66,7 +66,7 @@ void	init_data(t_data *data, t_philo *philo);
 //THREADS
 int		dead_loop(t_philo *philo);
 void	*routine(void *pointeur);
-int		thread_create(t_data *data, pthread_mutex_t *fork);
+int		thread_create(t_data *data, pthread_mutex_t *fork, t_philo *philo);
 
 //ACTIONS
 void	think(t_philo *philo);
