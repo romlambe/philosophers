@@ -51,7 +51,7 @@ int	ft_usleep(size_t millisecond)
 
 	start = get_current_time();
 	while ((get_current_time() - start) < millisecond)
-		usleep(500);
+		usleep(1000);
 	return (0);
 }
 
@@ -66,7 +66,7 @@ void	print_message(char *str, t_philo *philo, int id)
 	pthread_mutex_unlock(philo->write_lock);
 }
 
-void	ft_free(t_data *data, pthread_mutex_t *fork)
+void	ft_free(t_data *data, pthread_mutex_t *fork, t_philo *philo)
 {
 	int	i;
 
@@ -74,9 +74,13 @@ void	ft_free(t_data *data, pthread_mutex_t *fork)
 	while (i < data->philo[0].num_of_philos)
 	{
 		pthread_mutex_destroy(&fork[i]);
+		// free(philo[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&data->meal_lock);
 	pthread_mutex_destroy(&data->write_lock);
 	pthread_mutex_destroy(&data->dead_lock);
+	free(data);
+	free(philo);
+	free(fork);
 }

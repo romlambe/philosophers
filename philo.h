@@ -52,7 +52,7 @@ typedef struct s_data
 //UTILS
 int		ft_atoi(const char *nptr);
 void	print_message(char *str, t_philo *philo, int id);
-void	ft_free(t_data *data, pthread_mutex_t *fork);
+void	ft_free(t_data *data, pthread_mutex_t *fork, t_philo *philo);
 size_t	get_current_time(void);
 int		ft_usleep(size_t millisecond);
 

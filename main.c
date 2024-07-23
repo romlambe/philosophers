@@ -67,6 +67,6 @@ int	main(int ac, char **av)
 		printf("philo 1 is thinking\nphilo 1 has taken a fork\nphilo 1 die\n");
 	else
 		thread_create(data, fork);
-	ft_free(data, fork);
+	ft_free(data, fork, philo);
 	return (0);
 }
