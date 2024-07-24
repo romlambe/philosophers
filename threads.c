@@ -42,8 +42,7 @@ int	thread_create(t_data *data, pthread_mutex_t *fork, t_philo *philo)
 	pthread_t	thread;
 	int			i;
 
-	if (pthread_create(&thread, NULL, &monitor, data->philo) != 0)
-		ft_free(data, fork, philo);
+
 	i = 0;
 	while (i < data->philo[0].num_of_philos)
 	{
@@ -52,6 +51,8 @@ int	thread_create(t_data *data, pthread_mutex_t *fork, t_philo *philo)
 			ft_free(data, fork, philo);
 		i++;
 	}
+	if (pthread_create(&thread, NULL, &monitor, data->philo) != 0)
+		ft_free(data, fork, philo);
 	i = 0;
 	if (pthread_join(thread, NULL) != 0)
 		ft_free(data, fork, philo);
