@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:41:37 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 15:59:31 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/24 00:00:54 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void	*monitor(void *pointeur)
 	while (1)
 		if (check_if_dead(philo) == 1 || check_nb_eat(philo) == 1)
 			break ;
-	return (pointeur);
+	return (NULL);
 }

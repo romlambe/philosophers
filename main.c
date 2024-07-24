@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:24:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 16:02:18 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:13:36 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main(int ac, char **av)
 	if (philo->num_of_philos == 1)
 		printf("philo 1 is thinking\nphilo 1 has taken a fork\nphilo 1 die\n");
 	else
-		thread_create(data, fork);
+		thread_create(data, fork, philo);
 	ft_free(data, fork, philo);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 14:28:37 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 14:18:19 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/23 17:12:41 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	ft_free(t_data *data, pthread_mutex_t *fork, t_philo *philo)
 	while (i < data->philo[0].num_of_philos)
 	{
 		pthread_mutex_destroy(&fork[i]);
-		// free(philo[i]);
 		i++;
 	}
 	pthread_mutex_destroy(&data->meal_lock);
