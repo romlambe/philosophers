@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:44:57 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 14:20:54 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/24 09:26:06 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	eat(t_philo *philo)
 	pthread_mutex_unlock(philo->meal_lock);
 	ft_usleep(philo->time_to_eat);
 	philo->eating = 0;
-	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	pthread_mutex_unlock(philo->l_fork);
 }

@@ -6,7 +6,7 @@
 /*   By: romlambe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/17 15:07:41 by romlambe          #+#    #+#             */
-/*   Updated: 2024/07/22 14:22:30 by romlambe         ###   ########.fr       */
+/*   Updated: 2024/07/25 11:53:55 by romlambe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	thread_create(t_data *data, pthread_mutex_t *fork, t_philo *philo)
 {
 	pthread_t	thread;
 	int			i;
-
 
 	i = 0;
 	while (i < data->philo[0].num_of_philos)
